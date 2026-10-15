@@ -1,7 +1,9 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
     background-color: #f4edd0;
+    color: #16161e;
+    font-family: "Press Start 2P", system-ui;
 }
 
 nav {
@@ -11,4 +13,33 @@ nav {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     margin-bottom: 2rem;
+}
+h2, p {
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f4edd0;
+  border-color: #16161e;
+  border-width: 2rem;
+}
+
+ul li {
+  float: left;
+}
+
+ul li a {
+  display: block;
+  color: #16161e;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  background-color: #ec3750;
 }
