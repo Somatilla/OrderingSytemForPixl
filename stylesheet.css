@@ -34,6 +34,7 @@ ul li {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  margin-bottom: 1rem;
 }
 
 ul li:hover {
@@ -70,4 +71,58 @@ img {
   image-rendering: crisp-edges;
   width: 20vh;
   height: 20vh;
+}
+
+.foodsContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10rem;
+}
+
+.food {
+  border-width: 7px;
+  border-color: #16161e;
+  border-style: solid;
+}
+
+.foodName {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.price {
+  padding-left: 1rem;
+  color: #ec3750;
+}
+
+.cart {
+  z-index: 1;
+  margin-left: 90%;
+  margin-top: 3vh;
+}
+
+.cartButton {
+  background-color: #f4edd0;
+  font-family: "Press Start 2P", system-ui;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.cartButton:hover {
+  background-color: #ec3750;
+  font-family: "Press Start 2P", system-ui;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.cartImg {
+  width: 7vh;
+  height: 7vh;
 }
