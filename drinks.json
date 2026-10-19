@@ -1,0 +1,10 @@
+{
+    "foods": {
+        "1": {
+            "name": "coffee",
+            "price": "20",
+            "id": "1",
+            "img":"images/coffee.png"
+        }
+    }
+}

@@ -6,6 +6,7 @@
     <title>Pixl Café</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="index.js" type="module"></script>
 </head>
 <body>
     <div class="cart">
@@ -41,12 +42,12 @@
 
     <div class="middle">
         <ul>
-            <li>Foods</li>
-            <li>Drinks</li>
+            <li id="foodsButton">Foods</li>
+            <li id="drinksButton">Drinks</li>
             <li>Others</li>
         </ul>
 
-        <div class="foodsContainer">
+        <div class="foodsContainer" id="foodsContainer">
             <div class="food">
                 <img src="images/coffee.png" alt="Coffee">
                 <h3 class="foodName">Yummy coffee</h3>
