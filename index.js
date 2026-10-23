@@ -19,7 +19,7 @@ var foodsData = await getFoods("foods.json")
 foodsButton.addEventListener("click", foodButtonClicked)
 
 function foodButtonClicked() {
-  console.log("foods clicked")
+  console.log("foods clicked", "aaa")
   foodsContainer.innerHTML = ""
 
   for (let id = 1; id < 5; id++) {
@@ -33,13 +33,28 @@ function foodButtonClicked() {
 var drinksData = await getFoods("drinks.json")
 drinksButton.addEventListener("click", drinkButtonClicked)
 
+
 function drinkButtonClicked() {
   console.log("drinks clicked")
   foodsContainer.innerHTML = ""
 
-  for (let id = 1; id < 5; id++) {
-    var drinkTodisplay = drinksData.foods[id]
+  for (let id = 1; id <= Object.keys(drinksData.drinks).length; id++) {
+    var drinkTodisplay = drinksData.drinks[id]
     console.log(drinkTodisplay.name)
+
+    //paste element
+
+    const drinkElementHtml = `
+  <div class="food">
+    <img src="${drinkTodisplay.img}" alt="${drinkTodisplay.name}" class="foodDisplayImage"/>
+    <h3 class="foodName">${drinkTodisplay.name}</h3>
+    <p class="price">${drinkTodisplay.price} px</p>
+  </div>
+`
+//<p class="description">${drinkTodisplay.description}</p>
+
+
+    foodsContainer.insertAdjacentHTML("beforeend",drinkElementHtml)
     
   }
 

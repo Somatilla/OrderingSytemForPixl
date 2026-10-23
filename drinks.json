@@ -1,10 +1,21 @@
 {
-    "foods": {
+    "drinks": {
         "1": {
             "name": "coffee",
             "price": "20",
             "id": "1",
-            "img":"images/coffee.png"
+            "img":"images/coffee.png",
+            "description":"Just a cup of coffee, just how you like it."
+            
+        },
+
+        "2": {
+            "name": "cappuchino",
+            "price": "25",
+            "id": "2",
+            "img":"images/capucchino.png",
+            "description":"Imagine just sipping this while chilling under a blanket and looking out the window in the autumn break"
         }
+
     }
 }

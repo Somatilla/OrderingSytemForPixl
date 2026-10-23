@@ -126,3 +126,8 @@ img {
   width: 7vh;
   height: 7vh;
 }
+
+.foodDisplayImage {
+  margin-left: 1vh;
+  margin-right: 1vh;
+}
