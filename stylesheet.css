@@ -131,3 +131,15 @@ img {
   margin-left: 1vh;
   margin-right: 1vh;
 }
+
+.buyTop {
+  display: flex;
+}
+
+.buyImg {
+  margin-top: 1vh;
+}
+
+.buyDesc {
+  margin-top: 2vh;
+}

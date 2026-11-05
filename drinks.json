@@ -15,7 +15,30 @@
             "id": "2",
             "img":"images/capucchino.png",
             "description":"Imagine just sipping this while chilling under a blanket and looking out the window in the autumn break"
-        }
+        },
 
+        "3": {
+            "name": "Hot chocolate",
+            "price": "30",
+            "id": "3",
+            "img":"images/hotChocolate.png",
+            "description":"Imagine just sipping this while chilling under a blanket and looking out the window in the autumn break"
+        },
+
+        "4": {
+            "name": "Latte",
+            "price": "15",
+            "id": "4",
+            "img":"images/latte.png",
+            "description":"The best latte imaginable with a whole lot of whipped cream!"
+        },
+
+        "5": {
+            "name": "Pumpkin spice latte",
+            "price": "20",
+            "id": "5",
+            "img":"images/pumpkinSpiceLatte.png",
+            "description":"The best latte imaginable with cinamon and pumpin spice!"
+        }
     }
 }

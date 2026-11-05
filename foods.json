@@ -1,0 +1,21 @@
+{
+    "foods": {
+        "1": {
+            "name": "Chocolate chip cookie",
+            "price": "15",
+            "id": "1",
+            "img":"images/chocolateChipCookie.png",
+            "description":"Insanely yummy with 40% cocolate chips"
+            
+        },
+
+        "2": {
+            "name": "Pumpkin pie",
+            "price": "30",
+            "id": "2",
+            "img":"images/pumpkinPie.png",
+            "description":"Goes very well with the pumpin spice latte"
+            
+        }
+    }
+}
