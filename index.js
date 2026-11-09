@@ -1,3 +1,4 @@
+async function main () {
 var foodsContainer = document.getElementById("foodsContainer")
 var foodsButton = document.getElementById("foodsButton")
 var drinksButton = document.getElementById("drinksButton")
@@ -30,19 +31,25 @@ function foodButtonClicked() {
     //paste element
 
     const foodElement = `
-  <a href="buy.html">  
     <div class="food">
       <img src="${foodToDisplay.img}" alt="${foodToDisplay.name}" class="foodDisplayImage"/>
       <h3 class="foodName">${foodToDisplay.name}</h3>
       <p class="price">${foodToDisplay.price} px</p>
+      <button class="removeButton" id="remove${foodToDisplay.name}Button">-</button>
+      <p id="amount${foodToDisplay.name}">0</p>
+      <button class="buyButton" id="buy${foodToDisplay.name}Button">+</button>
     </div>
-  </a>
 `
 //<p class="description">${foodToDisplay.description}</p>
 
 
     foodsContainer.insertAdjacentHTML("beforeend",foodElement)
     
+    var addFoodToCartButton = document.getElementById(`buy${foodToDisplay.name}Button`)
+
+    addFoodToCartButton.addEventListener("click", () => {
+      addFoodToLocalStorage("food", foodToDisplay.id)
+    })
   }
 }
 
@@ -62,19 +69,56 @@ function drinkButtonClicked() {
     //paste element
 
     const drinkElementHtml = `
-  <a href="buy.html">
     <div class="food">
       <img src="${drinkTodisplay.img}" alt="${drinkTodisplay.name}" class="foodDisplayImage"/>
       <h3 class="foodName">${drinkTodisplay.name}</h3>
       <p class="price">${drinkTodisplay.price} px</p>
+      <div style="display: flex;">
+        <button class="removeButton" id="remove${drinkTodisplay.name}Button">-</button>
+        <p id="amount${drinkTodisplay.id}">0</p>
+        <button 
+  class="buyButton" 
+  id="buy${drinkTodisplay.name}Button"
+  onclick="addFoodToLocalStorage('drink', ${drinkTodisplay.id}, 1)"
+>
+  +
+</button>
+      </div>
     </div>
-  </a>  
 `
 //<p class="description">${drinkTodisplay.description}</p>
 
 
     foodsContainer.insertAdjacentHTML("beforeend",drinkElementHtml)
-    
+
   }
 
 }
+
+}
+
+async function addFoodToLocalStorage(type, id, amount) {
+  console.log(type, id, "A")
+
+  var newAmount
+  if (localStorage.getItem(id) !== null){
+    var OldAmount = JSON.parse(localStorage.getItem(id)).amount
+    newAmount = OldAmount + 1
+
+  }
+  else{
+    newAmount = 1
+  }
+  
+  displayAmount = document.getElementById("amount" + id)
+  displayAmount.innerHTML = newAmount
+
+  console.log("AA")
+
+  var save = {type:type, id:id, amount:newAmount}
+  var savStr = JSON.stringify(save)
+  localStorage.setItem(id, savStr)
+
+  console.log("SAVED")
+}
+main()
