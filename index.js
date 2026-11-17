@@ -3,6 +3,9 @@ var foodsContainer = document.getElementById("foodsContainer")
 var foodsButton = document.getElementById("foodsButton")
 var drinksButton = document.getElementById("drinksButton")
 var foodButton = document.getElementsByClassName("food")
+var foodNameHTML = document.getElementById("foodName")
+var foodDescriptionHTML = document.getElementById("foodDescription")
+var todaysSpecialImg = document.getElementById("todaysSpecialImg")
 
 async function getFoods(file) {
   try {
@@ -16,9 +19,37 @@ async function getFoods(file) {
   }
 }
 
+var drinksData = await getFoods("drinks.json")
 var foodsData = await getFoods("foods.json")
 
 foodsButton.addEventListener("click", foodButtonClicked)
+
+//################################--TODAY'S SPECIAL--#####################################
+
+var foodslength = Object.keys(foodsData.foods).length
+var drinkslength = Object.keys(drinksData.drinks).length
+
+console.log(foodNameHTML)
+
+var foodOrDrink = Math.floor(Math.random() * 2) + 1
+if(foodOrDrink == 1){
+  var randomFoodNumber = Math.floor(Math.random() * foodslength) + 1
+  var randomFood = foodsData["foods"]
+  console.log("CCC" + JSON.stringify(randomFood[randomFoodNumber.name]))
+  foodNameHTML.innerHTML = JSON.parse(JSON.stringify(randomFood[randomFoodNumber])).name
+  foodDescriptionHTML.innerHTML = JSON.parse(JSON.stringify(randomFood[randomFoodNumber])).description
+  todaysSpecialImg.src = JSON.parse(JSON.stringify(randomFood[randomFoodNumber])).img
+}
+else{
+  var randomDrinkNumber = Math.floor(Math.random() * drinkslength) + 1
+  var randomDrink = drinksData["drinks"]
+  console.log("CCC" + JSON.stringify(randomDrink[randomDrinkNumber.name]))
+  foodNameHTML.innerHTML = JSON.parse(JSON.stringify(randomDrink[randomDrinkNumber])).name
+  foodDescriptionHTML.innerHTML = JSON.parse(JSON.stringify(randomDrink[randomDrinkNumber])).description
+  console.log(todaysSpecialImg)
+  todaysSpecialImg.src = JSON.parse(JSON.stringify(randomDrink[randomDrinkNumber])).img
+}
+
 
 function foodButtonClicked() {
   console.log("foods clicked", "aaa")
@@ -35,26 +66,44 @@ function foodButtonClicked() {
       <img src="${foodToDisplay.img}" alt="${foodToDisplay.name}" class="foodDisplayImage"/>
       <h3 class="foodName">${foodToDisplay.name}</h3>
       <p class="price">${foodToDisplay.price} px</p>
-      <button class="removeButton" id="remove${foodToDisplay.name}Button">-</button>
-      <p id="amount${foodToDisplay.name}">0</p>
-      <button class="buyButton" id="buy${foodToDisplay.name}Button">+</button>
+      <div style="display: flex;">
+        <button 
+  class="removeButton" 
+  id="remove${foodToDisplay.name}Button"
+  onclick="removeFoodFromLocalStorage('food', ${foodToDisplay.id}, 1)"
+>
+  -
+</button>
+        <p id="amount${foodToDisplay.id}">0</p>
+        <button 
+  class="buyButton" 
+  id="buy${foodToDisplay.name}Button"
+  onclick="addFoodToLocalStorage('food', ${foodToDisplay.id}, 1)"
+>
+  +
+</button>
+      </div>
     </div>
 `
-//<p class="description">${foodToDisplay.description}</p>
-
+    //<p class="description">${foodToDisplay.description}</p>
 
     foodsContainer.insertAdjacentHTML("beforeend",foodElement)
-    
-    var addFoodToCartButton = document.getElementById(`buy${foodToDisplay.name}Button`)
+    displayAmount = document.getElementById("amount" + id)
 
-    addFoodToCartButton.addEventListener("click", () => {
-      addFoodToLocalStorage("food", foodToDisplay.id)
-    })
+
+    if (localStorage.getItem(foodToDisplay.id + "food") !== null){
+      loadAmount = JSON.parse(localStorage.getItem(foodToDisplay.id + "food")).amount
+    }
+    else{
+      loadAmount = 0
+    }
+
+
+    displayAmount.innerHTML = loadAmount
   }
 }
 
 
-var drinksData = await getFoods("drinks.json")
 drinksButton.addEventListener("click", drinkButtonClicked)
 
 
@@ -74,7 +123,13 @@ function drinkButtonClicked() {
       <h3 class="foodName">${drinkTodisplay.name}</h3>
       <p class="price">${drinkTodisplay.price} px</p>
       <div style="display: flex;">
-        <button class="removeButton" id="remove${drinkTodisplay.name}Button">-</button>
+        <button 
+  class="removeButton" 
+  id="remove${drinkTodisplay.name}Button"
+  onclick="removeFoodFromLocalStorage('drink', ${drinkTodisplay.id}, 1)"
+>
+  -
+</button>
         <p id="amount${drinkTodisplay.id}">0</p>
         <button 
   class="buyButton" 
@@ -90,6 +145,19 @@ function drinkButtonClicked() {
 
 
     foodsContainer.insertAdjacentHTML("beforeend",drinkElementHtml)
+    displayAmount = document.getElementById("amount" + id)
+
+
+    if (localStorage.getItem(drinkTodisplay.id + "drink") !== null){
+
+      loadAmount = JSON.parse(localStorage.getItem(drinkTodisplay.id + "drink")).amount
+    }
+    else{
+      loadAmount = 0
+    }
+
+
+    displayAmount.innerHTML = loadAmount
 
   }
 
@@ -98,11 +166,10 @@ function drinkButtonClicked() {
 }
 
 async function addFoodToLocalStorage(type, id, amount) {
-  console.log(type, id, "A")
 
   var newAmount
-  if (localStorage.getItem(id) !== null){
-    var OldAmount = JSON.parse(localStorage.getItem(id)).amount
+  if (localStorage.getItem(id + type) !== null){
+    var OldAmount = JSON.parse(localStorage.getItem(id + type)).amount
     newAmount = OldAmount + 1
 
   }
@@ -117,8 +184,37 @@ async function addFoodToLocalStorage(type, id, amount) {
 
   var save = {type:type, id:id, amount:newAmount}
   var savStr = JSON.stringify(save)
-  localStorage.setItem(id, savStr)
+  localStorage.setItem(id + type, savStr)
 
   console.log("SAVED")
 }
+
+async function removeFoodFromLocalStorage(type, id, amount) {
+
+  var newAmount
+  if (localStorage.getItem(id + type) !== null){
+    var OldAmount = JSON.parse(localStorage.getItem(id + type)).amount
+    newAmount = OldAmount - 1
+
+  }
+  else{
+    newAmount = 0
+  }
+
+  if (newAmount < 0) {
+    newAmount = 0
+  }
+  
+  displayAmount = document.getElementById("amount" + id)
+  displayAmount.innerHTML = newAmount
+
+  console.log("AA")
+
+  var save = {type:type, id:id, amount:newAmount}
+  var savStr = JSON.stringify(save)
+  localStorage.setItem(id + type, savStr)
+
+  console.log("SAVED")
+}
+
 main()
