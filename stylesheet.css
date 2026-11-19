@@ -143,3 +143,39 @@ img {
 .buyDesc {
   margin-top: 2vh;
 }
+.removeButton{
+  background-color: #f4edd0;
+  font-family: "Press Start 2P", system-ui;
+  text-decoration: none;
+  text-align: center;
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-color: #16161e;
+}
+.removeButton:hover {
+  background-color: #ec3750;
+  font-family: "Press Start 2P", system-ui;
+  text-decoration: none;
+  text-align: center;
+}
+.buyButton{
+  background-color: #f4edd0;
+  font-family: "Press Start 2P", system-ui;
+  text-decoration: none;
+  text-align: center;
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-color: #16161e;
+}
+.buyButton:hover {
+  background-color: #ec3750;
+  font-family: "Press Start 2P", system-ui;
+  text-decoration: none;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 10vh;
+}
